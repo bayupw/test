@@ -28,7 +28,7 @@ resource "aws_instance" "spoke1_instance" {
   ami                         = data.aws_ami.amazon_linux_2.id
   instance_type               = "t2.micro"
   key_name                    = var.key_name
-  subnet_id                   = module.spoke1_transit1.vpc.public_subnets[0]
+  subnet_id                   = module.spoke1_transit1.vpc.public_subnets[0].subnet_id
   vpc_security_group_ids      = [aws_security_group.spoke1_instance_sg.id]
   associate_public_ip_address = true
 
