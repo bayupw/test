@@ -17,7 +17,7 @@ module "transit_firenet_1" {
   ha_gw            = var.ha_gw
 }
 
-/* module "transit_firenet_2" {
+module "transit_firenet_2" {
   source  = "terraform-aviatrix-modules/aws-transit-firenet/aviatrix"
   version = "5.0.0"
   name = "transit-firenet2"
@@ -39,4 +39,4 @@ resource "aviatrix_transit_gateway_peering" "transit_firenet_peering" {
   transit_gateway_name2                       = module.transit_firenet_2.transit_gateway.gw_name
   #gateway1_excluded_network_cidrs             = ["0.0.0.0/0"]
   #gateway2_excluded_network_cidrs             = ["0.0.0.0/0"]
-} */
+}
