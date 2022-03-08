@@ -14,7 +14,7 @@ module "spoke1_transit1" {
   ha_gw         = var.ha_gw
 }
 
-/* module "spoke2_transit1" {
+module "spoke2_transit1" {
   source        = "terraform-aviatrix-modules/mc-spoke/aviatrix"
   cloud         = "AWS"
   name          = "spoke2"
@@ -54,4 +54,4 @@ module "spoke4_transit2" {
   insane_mode   = var.hpe
   instance_size = var.aws_instance_size
   ha_gw         = var.ha_gw
-} */
+}
