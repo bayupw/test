@@ -81,7 +81,7 @@ resource "aws_vpc_endpoint" "spoke1_ec2_messages_endpoint" {
 resource "aws_security_group" "spoke2_endpoint_sg" {
   name        = "spoke2-ec2-endpoints-sg"
   description = "Allow TLS inbound traffic for SSM/EC2 endpoints"
-  vpc_id      = module.spoke1_transit1.vpc.vpc_id
+  vpc_id      = module.spoke2_transit1.vpc.vpc_id
 
   ingress {
     description = "TLS from VPC"
