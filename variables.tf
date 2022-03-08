@@ -110,7 +110,7 @@ variable "key_name" {
   description = "Existing SSH public key name"
 }
 
-variable "fw_admin_password" {
+variable "vm_admin_password" {
   type        = string
   default     = "Aviatrix123#"
   description = "Firewall admin password"
@@ -132,7 +132,7 @@ locals {
   fg_init_conf = <<EOF
 config system admin
     edit admin
-        set password ${var.fw_admin_password}
+        set password ${var.vm_admin_password}
 end
 config system global
     set hostname fg

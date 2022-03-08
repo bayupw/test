@@ -28,10 +28,17 @@ resource "aws_instance" "spoke1_instance" {
   ami                         = data.aws_ami.amazon_linux_2.id
   instance_type               = "t2.micro"
   key_name                    = var.key_name
-  subnet_id                   = module.spoke1_transit1.vpc.public_subnets[0].subnet_id
+  subnet_id                   = module.spoke1_transit1.vpc.private_subnets[0].subnet_id
   vpc_security_group_ids      = [aws_security_group.spoke1_instance_sg.id]
-  associate_public_ip_address = true
-  iam_instance_profile        = "ssm-instance-profile"
+  associate_public_ip_address = false
+  iam_instance_profile        = aws_iam_instance_profile.ssm_instance_profile.name
+
+  user_data = <<EOF
+#!/bin/bash
+sudo sed 's/PasswordAuthentication no/PasswordAuthentication yes/' -i /etc/ssh/sshd_config
+sudo systemctl restart sshd
+echo ec2-user:${var.vm_admin_password} | sudo chpasswd
+EOF
 
   tags = {
     Name = "spoke1-instance"
@@ -41,7 +48,7 @@ resource "aws_instance" "spoke1_instance" {
 # ---------------------------------------------------------------------------------------------------------------------
 # spoke2 ec2
 # ---------------------------------------------------------------------------------------------------------------------
-
+/* 
 resource "aws_security_group" "spoke2_instance_sg" {
   name        = "spoke2/sg-instance"
   description = "Allow all traffic from VPCs inbound and all outbound"
@@ -156,4 +163,4 @@ resource "aws_instance" "spoke4_instance" {
   tags = {
     Name = "spoke4-instance"
   }
-}
+} */
